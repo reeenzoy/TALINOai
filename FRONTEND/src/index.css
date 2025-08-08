@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. Root layout */
+.app-wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: visible;
+}
+
+/* 2. Sidebar */
+.text-container {
+  width: 260px;
+  background-color: #2d3748;
+  color: #edf2f7;
+  padding: 1.5rem;
+}
+.text-container h2 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.text-container .sample {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+.text-container ul {
+  list-style: none;
+  padding: 0;
+}
+.text-container li {
+  margin-bottom: 0.15rem;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* 3. Main content wrapper */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  overflow: hidden;   /* content-body will scroll */
+  padding: 2rem;
+  align-content: center;
+}
+
+/* 4. Scrollable panel */
+.content-body {
+  position: relative;   /* for internal spacing and padding-bottom */
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 120px; /* make room so content never hides under composer */
+}
+
+/* 5. Logo */
+.logo {
+  height: 5rem;
+  object-fit: contain;
+  margin-top: 100px;
+}
+
+.table-container {
+  margin-top: 2rem;
+  width: 80%;
+  overflow-x: auto;           /* allow horizontal scroll on small screens */
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #111827;             /* dark gray */
+}
+
+/* Base table reset + layout */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;           /* ensures scroll if too narrow */
+}
+
+/* Header cells */
+.results-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background-color: #f3f4f6;  /* light gray */
+  font-weight: 500;
+  border-bottom: 2px solid #e5e7eb;
+  color: #374151;             /* medium gray */
+}
+
+/* Body cells */
+.results-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #1f2937;             /* almost black */
+}
+
+/* Zebra stripes */
+.results-table tbody tr.row-alt {
+  background-color: #fafafb;
+}
+
+/* Hover highlight */
+.results-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* 6. Composer base */
+.composer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+/* 6a. Centered on first load */
+.composer-center {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* placeholder color */
+.composer-textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* 6b. Fixed at bottom of main-content */
+.composer-bottom {
+  position: fixed;
+  bottom: 16px;
+  left: calc(485px + 2rem);
+  width: calc(100vw - 260px - 4rem);
+  max-width: 750px;
+  margin: 0;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+}
+
+/* 7. Focus state */
+.composer:focus-within {
+  border-color: var(--accent-color, #3b82f6);
+  box-shadow: inset 0 0 0 1px var(--accent-color, #3b82f6);
+}
+
+/* 8. Textarea */
+.composer-textarea {
+  resize: none;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--input-text, #1f2937);
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0;
+  width: 100%;
+  min-height: 30px;
+}
+
+/* 9. Actions row */
+.composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 10. Chart dropdown */
+.select-chart {
+  background: #ffffff;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  color: var(--input-text, #1f2937);
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+/* 11. Send button */
+.icon-btn.send {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: var(--accent-color, #3b82f6);
+  transition: opacity 0.2s;
+}
+.icon-btn.send.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* 12. Hide textarea scrollbar */
+.composer-textarea.scrollable {
+  overflow-y: auto;
+  scrollbar-width: none;
+  background-color: transparent;
+}
+.composer-textarea.scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.visualization {
+  margin-top: 20px;
+}
+
+.results-section {
+  margin-left: 200px;
+}
+
+.main-content.first-sent > header {
+  display: none;
+}
+
+/* 13. Responsive tweaks */
+@media (max-width: 700px) {
+  .composer {
+    width: calc(100vw - 0px);
+    padding: 8px 10px;
+    border-radius: 0;
+  }
+  .composer-bottom {
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    padding: 8px 10px;
+    border-radius: 0;
+  }
+  .composer-textarea {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .composer {
+    max-width: 98%;
+    padding: 10px 15px;
+    border-radius: 18px;
+  }
+  .composer-textarea {
+    min-height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .composer {
+    width: 100%;
+  }
+}
